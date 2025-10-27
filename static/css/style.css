@@ -1,0 +1,189 @@
+/* --- 1. CSS Variables for Theming --- */
+:root {
+    --bg-color: #f8f9fa;
+    --text-color: #212529;
+    --text-muted: #6c757d;
+    --card-bg: #ffffff;
+    --border-color: #dee2e6;
+    --primary-color: #0d6efd;
+    --navbar-bg: #212529; /* Dark navbar by default */
+}
+
+body.dark-mode {
+    --bg-color: #121212;
+    --text-color: #e9ecef;
+    --text-muted: #adb5bd;
+    --card-bg: #1e1e1e;
+    --border-color: #495057;
+    --primary-color: #428bff;
+    --navbar-bg: #1a1a1a;
+}
+
+/* --- 2. Global Styles --- */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- 3. Theme Toggle Button --- */
+.theme-toggle {
+    cursor: pointer;
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    border: none;
+    background: none;
+    color: var(--text-muted);
+}
+.theme-toggle:hover {
+    color: var(--text-color);
+}
+/* Position for auth pages */
+.auth-container .theme-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1030;
+}
+/* Position for app pages (in navbar) */
+.navbar .theme-toggle {
+    color: rgba(255, 255, 255, 0.55);
+}
+.navbar .theme-toggle:hover {
+    color: rgba(255, 255, 255, 0.75);
+}
+/* Hide the icon that is not active */
+.dark-mode .bi-sun-fill { display: none; }
+:not(.dark-mode) .bi-moon-fill { display: none; }
+
+/* --- 4. Auth Page Styles (Login & Signup) --- */
+.auth-container {
+    min-height: 100vh;
+}
+
+.login-image-col {
+    /* --- THIS IS THE UPDATED LINE --- */
+    background-image: url('https://static.vecteezy.com/system/resources/previews/006/588/653/non_2x/social-media-user-profile-icon-on-video-call-screen-vector.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.login-form-container,
+.signup-form-container {
+    width: 100%;
+    max-width: 450px;
+    padding: 2.5rem;
+    background-color: var(--card-bg); /* Use variable */
+    border-radius: 8px;
+}
+
+/* On small screens, hide image, center form, and show card background */
+@media (max-width: 767.98px) {
+    .login-image-col {
+        display: none;
+    }
+    .login-form-col {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: var(--bg-color); /* Ensure bg matches theme */
+    }
+    .login-form-container {
+         box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+}
+
+.auth-title {
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.auth-subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+.auth-form .form-label {
+    color: var(--text-muted);
+}
+
+.auth-form .form-control,
+.auth-form .form-select {
+    border: none;
+    border-bottom: 2px solid var(--border-color);
+    border-radius: 0;
+    padding-left: 0;
+    background-color: transparent; /* No background */
+    color: var(--text-color); /* Text color */
+}
+.auth-form .form-control:focus,
+.auth-form .form-select:focus {
+    box-shadow: none;
+    border-color: var(--primary-color);
+    background-color: transparent;
+    color: var(--text-color);
+}
+/* Fix for dark mode autofill */
+.auth-form .form-control:-webkit-autofill,
+.auth-form .form-control:-webkit-autofill:hover, 
+.auth-form .form-control:-webkit-autofill:focus, 
+.auth-form .form-control:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px var(--card-bg) inset !important;
+    -webkit-text-fill-color: var(--text-color) !important;
+}
+
+.auth-form .btn-primary {
+    padding: 0.75rem;
+    border-radius: 50px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background-color: var(--primary-color);
+    border: none;
+}
+
+.auth-form .forgot-link,
+.auth-form .signup-link a {
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--primary-color);
+}
+.auth-form .signup-link {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+/* --- 5. App (Dashboard) Styles --- */
+.navbar {
+    background-color: var(--navbar-bg) !important; /* Use variable and !important to override Bootstrap */
+}
+
+.app-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+.app-table-header {
+    background-color: #343a40; /* Keeping table header dark for contrast */
+    color: #fff;
+}
+.table {
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+    --bs-table-accent-bg: rgba(0, 0, 0, 0.03); /* Slight tint for light mode */
+}
+body.dark-mode .table-striped > tbody > tr:nth-of-type(odd) > * {
+    --bs-table-accent-bg: rgba(255, 255, 255, 0.03); /* Slight tint for dark mode */
+}
+
+/* --- 6. Flash Messages --- */
+.flash-messages {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    width: auto;
+    max-width: 400px;
+}

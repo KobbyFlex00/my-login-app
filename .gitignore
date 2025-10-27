@@ -1,0 +1,10 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Database
+users.db
+
+# OS files
+.DS_Store
